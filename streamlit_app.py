@@ -40,19 +40,6 @@ except URLError as e:
     streamlit.error()
 
 
-
-
-
-
-
-
-# write your own comment -what does the next line do? 
-
-# write your own comment - what does this do?
-
-
-
-
 streamlit.header("The Fruit load list contains:")
 #Snowflake related functions
 def get_fruit_load_list():
@@ -61,9 +48,10 @@ def get_fruit_load_list():
      return my_cur.fetchall()
        
 #Add a button to load the fruit
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_data_rows = get_fruit_load_list()
-streamlit.dataframe(my_data_rows)
+if streamlit.button(get_fruit_load_list):
+   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+   my_data_rows = get_fruit_load_list()
+   streamlit.dataframe(my_data_rows)
 
 streamlit.stop()
 
